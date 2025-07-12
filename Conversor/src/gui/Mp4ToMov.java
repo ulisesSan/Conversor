@@ -8,7 +8,7 @@ import java.io.InputStream;
 
 public class Mp4ToMov {
     private JTextField inputFileSource;
-    private JPanel contentPane;
+    private JPanel contentPane ;
     private JLabel labelSource;
     private JButton accept;
 
@@ -35,9 +35,10 @@ public class Mp4ToMov {
 
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                String[] cmd = {"cat /proc/cpuinfo"};
+                String name = inputFileSource.getText();
+                String[] cmd = {"ffmpeg", "-i", name,"-f","mov",name+"output_file.mov"};
                 try {
-                    Process process = Runtime.getRuntime().exec(new String[]{"bash -c mp4_to_mov.sh","for i in *.mp4"});//; do",
+                    Process process = Runtime.getRuntime().exec(cmd);//; do",
 //                    "[ -e \"$i\" ] || continue","filename=\"${i%.mp4}\"","ffmpeg -i \"$i\"","-c:v prores_ks -profile:v 3 -qscale:v 9",
 //                    "-c:a pcm_s16le","\"${filename}_prores.mov\"","done"});
 
